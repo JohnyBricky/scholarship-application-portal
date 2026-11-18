@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>System Settings — Real LIFE Foundation (BGC)</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top rl-navbar">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="staff.html">
+        <img src="assets/rl/Logo/Real LIFE Logo black.png" alt="Real LIFE Foundation Logo" style="height: 40px; width: auto;" />
+        <span class="badge bg-success-subtle text-success-emphasis border border-success-subtle d-none d-sm-inline">System Settings</span>
+      </a>
+      <div class="d-flex align-items-center gap-2">
+        <a href="staff.html" class="btn btn-outline-rl btn-sm">Back to Dashboard</a>
+        <div class="dropdown">
+          <button class="nav-profile-card dropdown-toggle" type="button" id="adminProfileCard" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="nav-profile-avatar" id="navProfileAvatar">S</div>
+            <div class="nav-profile-meta text-start">
+              <div class="nav-profile-name" id="navProfileName">—</div>
+              <div class="nav-profile-sub" id="navProfileSub">Administrator</div>
+            </div>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+            <li><h6 class="dropdown-header">System Settings</h6></li>
+            <li><button class="dropdown-item" type="button" onclick="openSystemTab('tabSmtp')">SMTP Configuration</button></li>
+            <li><button class="dropdown-item" type="button" onclick="openSystemTab('tabAccounts')">Accounts</button></li>
+            <li><button class="dropdown-item" type="button" onclick="openSystemTab('tabIps')">IP &amp; MAC Tracking</button></li>
+            <li><button class="dropdown-item" type="button" onclick="openSystemTab('tabStorage')">File Storage Controller</button></li>
+            <li><button class="dropdown-item" type="button" onclick="openSystemTab('tabHomeContent')">Home Content &amp; Hero</button></li>
+            <li><button class="dropdown-item" type="button" onclick="openSystemTab('tabAppCtrl')">Application Controller</button></li>
+            <li><button class="dropdown-item" type="button" onclick="openSystemTab('tabAudit')">Audit Trail</button></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><button class="dropdown-item text-danger" type="button" onclick="logout()">Sign Out</button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="section-pad">
+    <div class="container">
+      <div id="systemSettingsSection" class="card border-0 shadow-sm p-4">
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+          <div>
+            <h3 class="section-title mb-1">System Settings</h3>
+            <p class="text-muted small mb-0">Manage SMTP, accounts, IP/MAC access control, file storage, home content, application season, and audit logs.</p>
+          </div>
+        </div>
+
+        <ul class="nav nav-tabs mb-4" role="tablist">
+          <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tabSmtp" type="button">SMTP Configuration</button></li>
+          <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabAccounts" type="button">Accounts</button></li>
+          <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabIps" type="button">IP &amp; MAC Tracking</button></li>
+          <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabStorage" type="button">File Storage Controller</button></li>
+          <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabHomeContent" type="button">Home Content &amp; Hero</button></li>
+          <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabAppCtrl" type="button">Application Controller</button></li>
+          <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabAudit" type="button">Audit Trail</button></li>
+        </ul>
+
+        <div class="tab-content">
+          <!-- Tab 1: SMTP Configuration -->
+          <div class="tab-pane fade show active" id="tabSmtp">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="small text-muted">Configure sender email and App Password (stored in SQLite) for real OTP &amp; status emails.</span>
+              <span id="smtpStatusBadge" class="badge bg-secondary-subtle text-secondary-emphasis">Not Configured</span>
+            </div>
+            <form id="smtpForm" class="row g-3">
+              <div class="col-md-5">
+                <label for="smtpHost" class="form-label small fw-semibold">SMTP Host</label>
+                <input type="text" id="smtpHost" class="form-control" value="smtp.gmail.com" required />
+              </div>
+              <div class="col-md-2">
+                <label for="smtpPort" class="form-label small fw-semibold">Port</label>
+                <input type="number" id="smtpPort" class="form-control" value="587" required />
+              </div>
+              <div class="col-md-5">
+                <label for="smtpUser" class="form-label small fw-semibold">Sender Email</label>
+                <input type="email" id="smtpUser" class="form-control" placeholder="your-email@gmail.com" required />
+              </div>
+              <div class="col-md-6">
+                <label for="smtpPass" class="form-label small fw-semibold">App Password</label>
+                <input type="password" id="smtpPass" class="form-control" placeholder="Leave blank to keep existing password" />
+              </div>
+              <div class="col-md-6">
+                <label for="smtpTestTo" class="form-label small fw-semibold">Test Recipient Email (optional)</label>
+                <input type="email" id="smtpTestTo" class="form-control" placeholder="Defaults to Sender Email" />
+              </div>
+              <div class="col-12 d-flex flex-wrap gap-4">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="smtpEnabledCheck" checked />
+                  <label class="form-check-label small fw-semibold" for="smtpEnabledCheck">Enable SMTP Email Sending</label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="notifyStatusCheck" checked />
+                  <label class="form-check-label small fw-semibold" for="notifyStatusCheck">Send Status Update Emails to Applicants</label>
+                </div>
+              </div>
+              <div class="col-12 d-flex flex-wrap align-items-center gap-2">
+                <button type="submit" class="btn btn-rl btn-sm px-3">Save SMTP Settings</button>
+                <button type="button" class="btn btn-outline-rl btn-sm px-3" onclick="testSmtpEmail()">Send Test Email</button>
+                <span id="smtpFeedback" class="small fw-semibold"></span>
+              </div>
+            </form>
+          </div>
+
+          <!-- Tab 2: Account Creation & Deletion -->
+          <div class="tab-pane fade" id="tabAccounts">
+            <form id="createAccountForm" class="row g-2 align-items-end mb-4 p-3 bg-light rounded border">
+              <div class="col-md-3">
+                <label class="form-label small fw-semibold">Full Name</label>
+                <input type="text" id="newAccName" class="form-control form-control-sm" placeholder="e.g., Jane Doe" required />
+              </div>
+              <div class="col-md-3">
+                <label class="form-label small fw-semibold">Email</label>
+                <input type="email" id="newAccEmail" class="form-control form-control-sm" placeholder="user@reallife.ph" required />
+              </div>
+              <div class="col-md-2">
+                <label class="form-label small fw-semibold">Password</label>
+                <input type="password" id="newAccPass" class="form-control form-control-sm" minlength="6" placeholder="6+ chars" required />
+              </div>
+              <div class="col-md-2">
+                <label class="form-label small fw-semibold">Role</label>
+                <select id="newAccRole" class="form-select form-select-sm">
+                  <option value="applicant">Applicant</option>
+                  <option value="approver">Approver (Reviews &amp; Notifications)</option>
+                  <option value="system_admin">System Admin (Settings Control)</option>
+                  <option value="comms_admin">Comms Admin (Email &amp; Content)</option>
+                  <option value="admin">Super Admin (Full Access)</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <button type="submit" class="btn btn-rl btn-sm w-100">Create Account</button>
+              </div>
+              <div id="accFeedback" class="col-12 small fw-semibold d-none"></div>
+            </form>
+
+            <div class="table-responsive">
+              <table class="table table-sm table-hover align-middle border">
+                <thead class="table-light">
+                  <tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th class="text-end">Action</th></tr>
+                </thead>
+                <tbody id="adminUsersBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Tab 3: IP & MAC Tracking & Blocking -->
+          <div class="tab-pane fade" id="tabIps">
+            <form id="blockIpForm" class="row g-2 align-items-end mb-4 p-3 bg-light rounded border">
+              <div class="col-md-6">
+                <label class="form-label small fw-semibold">IP Address to Block</label>
+                <input type="text" id="manualBlockIp" class="form-control form-control-sm" placeholder="e.g., 203.0.113.42" required />
+              </div>
+              <div class="col-md-3">
+                <button type="submit" class="btn btn-danger btn-sm w-100">Block IP</button>
+              </div>
+              <div class="col-md-3">
+                <button type="button" class="btn btn-outline-secondary btn-sm w-100" onclick="loadAdminIps()">Refresh Logs</button>
+              </div>
+            </form>
+
+            <div class="table-responsive">
+              <table class="table table-sm table-hover align-middle border">
+                <thead class="table-light">
+                  <tr><th>IP Address</th><th>MAC Address</th><th>Last Seen</th><th>Requests</th><th>Last Endpoint</th><th>Status</th><th class="text-end">Action</th></tr>
+                </thead>
+                <tbody id="adminIpsBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Tab 4: File Storage Controller -->
+          <div class="tab-pane fade" id="tabStorage">
+            <form id="storageForm" class="row g-3">
+              <div class="col-md-4">
+                <label for="storageProvider" class="form-label small fw-semibold">Active Storage Provider</label>
+                <select id="storageProvider" class="form-select" onchange="toggleStorageFields()">
+                  <option value="filesystem">Local File System (Versioned)</option>
+                  <option value="google_drive">Google Drive</option>
+                  <option value="nextcloud">Nextcloud (WebDAV)</option>
+                </select>
+              </div>
+              <div class="col-md-8" id="fsConfigGroup">
+                <label for="storageBaseDir" class="form-label small fw-semibold">Base Directory</label>
+                <input type="text" id="storageBaseDir" class="form-control" placeholder="Images" />
+              </div>
+              <div class="col-md-8 d-none" id="gdriveConfigGroup">
+                <label for="storageGdriveRoot" class="form-label small fw-semibold">Google Drive Root Folder ID</label>
+                <input type="text" id="storageGdriveRoot" class="form-control" placeholder="1A2B3C..." />
+              </div>
+              <div class="col-md-4 d-none" id="nextcloudUrlGroup">
+                <label for="storageNextcloudUrl" class="form-label small fw-semibold">Nextcloud WebDAV URL</label>
+                <input type="url" id="storageNextcloudUrl" class="form-control" placeholder="https://cloud.example.com/remote.php/dav/files/user/" />
+              </div>
+              <div class="col-md-4 d-none" id="nextcloudUserGroup">
+                <label for="storageNextcloudUser" class="form-label small fw-semibold">Nextcloud Username</label>
+                <input type="text" id="storageNextcloudUser" class="form-control" placeholder="service-account" />
+              </div>
+              <div class="col-12">
+                <div class="bg-light border rounded p-3 small font-monospace text-secondary">
+                  Images / &lt;Year&gt; / &lt;Ongoing | Rejected&gt; / &lt;Applicant Name&gt; / Requirements / &lt;Category&gt; / &lt;Category&gt;_v1, _v2...
+                </div>
+              </div>
+              <div class="col-12 d-flex align-items-center gap-2">
+                <button type="submit" class="btn btn-rl btn-sm px-3">Save Storage Controller</button>
+                <span id="storageFeedback" class="small fw-semibold"></span>
+              </div>
+            </form>
+          </div>
+
+          <!-- Tab 5: Home Content & Hero Carousel Controller -->
+          <div class="tab-pane fade" id="tabHomeContent">
+            <div class="row g-4">
+              <div class="col-12">
+                <h6 class="fw-bold text-success text-uppercase mb-2">Hero Carousel Images (Max 5)</h6>
+                <form id="heroImageForm" class="row g-2 align-items-end mb-3 p-3 bg-light rounded border">
+                  <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Upload Image</label>
+                    <input type="file" id="heroFileInput" class="form-control form-control-sm" accept="image/*" />
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Or Image URL</label>
+                    <input type="text" id="heroUrlInput" class="form-control form-control-sm" placeholder="assets/rl/..." />
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label small fw-semibold">Caption</label>
+                    <input type="text" id="heroCaptionInput" class="form-control form-control-sm" placeholder="Optional" />
+                  </div>
+                  <div class="col-md-2">
+                    <button type="submit" class="btn btn-rl btn-sm w-100">Add Image</button>
+                  </div>
+                </form>
+                <div id="adminHeroList" class="row g-2"></div>
+              </div>
+
+              <div class="col-12">
+                <h6 class="fw-bold text-success text-uppercase mb-2">Announcements &amp; Bulletin Board</h6>
+                <form id="announcementForm" class="row g-2 align-items-end mb-3 p-3 bg-light rounded border">
+                  <div class="col-md-3">
+                    <label class="form-label small fw-semibold">Category</label>
+                    <input type="text" id="annCategory" class="form-control form-control-sm" placeholder="e.g., Orientation" required />
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label small fw-semibold">Title</label>
+                    <input type="text" id="annTitle" class="form-control form-control-sm" required />
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Details</label>
+                    <input type="text" id="annBody" class="form-control form-control-sm" required />
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-check mb-1">
+                      <input class="form-check-input" type="checkbox" id="annBannerCheck" />
+                      <label class="form-check-label small fw-semibold" for="annBannerCheck">Show on Banner</label>
+                    </div>
+                    <button type="submit" class="btn btn-rl btn-sm w-100">Post</button>
+                  </div>
+                </form>
+                <div class="table-responsive">
+                  <table class="table table-sm align-middle border">
+                    <thead class="table-light">
+                      <tr><th>Category</th><th>Title &amp; Details</th><th>Banner</th><th class="text-end">Action</th></tr>
+                    </thead>
+                    <tbody id="adminAnnBody"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <h6 class="fw-bold text-success text-uppercase mb-2">FAQ Controller</h6>
+                <form id="faqForm" class="row g-2 align-items-end mb-3 p-3 bg-light rounded border">
+                  <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Question</label>
+                    <input type="text" id="faqQuestion" class="form-control form-control-sm" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label small fw-semibold">Answer</label>
+                    <input type="text" id="faqAnswer" class="form-control form-control-sm" required />
+                  </div>
+                  <div class="col-md-2">
+                    <button type="submit" class="btn btn-rl btn-sm w-100">Add FAQ</button>
+                  </div>
+                </form>
+                <div class="table-responsive">
+                  <table class="table table-sm align-middle border">
+                    <thead class="table-light">
+                      <tr><th>Question</th><th>Answer</th><th class="text-end">Action</th></tr>
+                    </thead>
+                    <tbody id="adminFaqBody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 6: Application Controller -->
+          <div class="tab-pane fade" id="tabAppCtrl">
+            <div class="p-3 bg-light border rounded mb-4">
+              <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+                <div>
+                  <h6 class="fw-bold mb-1">Registration Season</h6>
+                  <p class="small text-muted mb-0">When closed, the public home page displays: <em>"Registration for the school year is not yet open. Check for announcement."</em></p>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                  <span id="regSeasonBadge" class="badge bg-success-subtle text-success-emphasis">Open</span>
+                  <button type="button" id="toggleRegSeasonBtn" class="btn btn-outline-rl btn-sm" onclick="toggleRegistrationSeason()">Close Registration</button>
+                </div>
+              </div>
+              <div class="row g-2 align-items-end pt-2 border-top">
+                <div class="col-md-4">
+                  <label for="appClientNameInput" class="form-label small fw-semibold">Client / Center Name (e.g., BGC)</label>
+                  <input type="text" id="appClientNameInput" class="form-control form-control-sm" value="BGC" placeholder="e.g., BGC" />
+                </div>
+                <div class="col-md-2">
+                  <button type="button" class="btn btn-outline-rl btn-sm w-100" onclick="saveClientName()">Save Center</button>
+                </div>
+                <div class="col-md-4">
+                  <label for="appDeadlineInput" class="form-label small fw-semibold">Application &amp; Requirements Deadline</label>
+                  <input type="date" id="appDeadlineInput" class="form-control form-control-sm" />
+                </div>
+                <div class="col-md-2">
+                  <button type="button" class="btn btn-rl btn-sm w-100" onclick="saveApplicationDeadline()">Save Deadline</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Flag Filter Rules Controller -->
+            <div class="p-3 bg-light border rounded mb-4">
+              <h6 class="fw-bold mb-2">Flag Filter Controller</h6>
+              <p class="small text-muted mb-3">Configure which risk and eligibility flags the Staff Dashboard should evaluate.</p>
+              <form id="flagRulesForm" class="row g-2 align-items-end">
+                <div class="col-md-3">
+                  <label for="flagGpaThreshold" class="form-label small fw-semibold">GPA Flag Below (%)</label>
+                  <input type="number" id="flagGpaThreshold" class="form-control form-control-sm" step="0.5" min="60" max="100" value="85" />
+                </div>
+                <div class="col-md-4">
+                  <label for="flagIncomeBracket" class="form-label small fw-semibold">Income Flag Bracket</label>
+                  <select id="flagIncomeBracket" class="form-select form-select-sm">
+                    <option value="Above PHP 30,000">Above PHP 30,000</option>
+                    <option value="PHP 20,001 - 30,000">PHP 20,001 - 30,000</option>
+                    <option value="">Disabled</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-check mb-1">
+                    <input class="form-check-input" type="checkbox" id="flagEnableRisk" checked />
+                    <label class="form-check-label small fw-semibold" for="flagEnableRisk">Flag Non-Completion Risk</label>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <button type="submit" class="btn btn-rl btn-sm w-100">Save Flags</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Requirement Type Dictionary -->
+            <div class="p-3 bg-light border rounded mb-4">
+              <h6 class="fw-bold mb-2">Requirement Type Dictionary</h6>
+              <p class="small text-muted mb-3">Define requirement categories shown to applicants and counted toward document completeness.</p>
+              <form id="reqDictForm" class="row g-2 align-items-end mb-3">
+                <div class="col-md-3">
+                  <label class="form-label small fw-semibold">Code (Folder Name)</label>
+                  <input type="text" id="reqDictCode" class="form-control form-control-sm" placeholder="e.g., GoodMoral" required />
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label small fw-semibold">Display Label</label>
+                  <input type="text" id="reqDictLabel" class="form-control form-control-sm" placeholder="e.g., Certificate of Good Moral" required />
+                </div>
+                <div class="col-md-3">
+                  <div class="form-check mb-1">
+                    <input class="form-check-input" type="checkbox" id="reqDictRequired" checked />
+                    <label class="form-check-label small fw-semibold" for="reqDictRequired">Required for Risk Check</label>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <button type="submit" class="btn btn-rl btn-sm w-100">Add Type</button>
+                </div>
+              </form>
+              <div class="table-responsive">
+                <table class="table table-sm align-middle border bg-white mb-0">
+                  <thead class="table-light">
+                    <tr><th style="width:32px;"></th><th>Code</th><th>Label</th><th>Required</th><th class="text-end">Action</th></tr>
+                  </thead>
+                  <tbody id="reqDictBody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="border border-danger rounded p-4 bg-danger-subtle bg-opacity-10">
+              <h6 class="fw-bold text-danger text-uppercase mb-2">Danger Zone — School Year Lifecycle</h6>
+              <p class="small text-muted mb-3">
+                <strong>Start New School Year (Archive):</strong> Zeroes out the active dashboard by archiving current applications and applicant accounts while <strong>preserving</strong> Admin accounts, SMTP configuration, File Storage Controller, and Home Content.
+              </p>
+
+              <div class="row g-3 align-items-end mb-3">
+                <div class="col-md-5">
+                  <label for="archiveCycleName" class="form-label small fw-semibold">Archive Cycle Label</label>
+                  <input type="text" id="archiveCycleName" class="form-control form-control-sm" value="SY 2026-2027" />
+                </div>
+                <div class="col-md-4">
+                  <button type="button" class="btn btn-warning btn-sm w-100 fw-semibold" onclick="archiveSchoolYear()">Start New School Year (Archive Data)</button>
+                </div>
+                <div class="col-md-3">
+                  <button type="button" class="btn btn-danger btn-sm w-100 fw-semibold" onclick="deleteArchivedSchoolYear()">Delete Archived Data</button>
+                </div>
+              </div>
+              <div class="small text-muted" id="cycleStatsText">Active applications: — | Archived applications: —</div>
+            </div>
+          </div>
+
+          <!-- Tab 7: Audit Trail -->
+          <div class="tab-pane fade" id="tabAudit">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="small text-muted">Chronological record of portal registrations, status changes, file uploads, and admin settings updates.</span>
+              <button class="btn btn-outline-secondary btn-sm" type="button" onclick="loadAuditLogs()">Refresh</button>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-sm table-hover align-middle border">
+                <thead class="table-light">
+                  <tr><th>Timestamp</th><th>Actor</th><th>Action</th><th>Target</th><th>Details</th></tr>
+                </thead>
+                <tbody id="adminAuditBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="js/components/core.js"></script>
+  <script src="js/components/home.js"></script>
+  <script src="js/components/settings.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

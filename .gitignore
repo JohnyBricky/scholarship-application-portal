@@ -1,0 +1,39 @@
+# Python bytecode & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# SQLite databases (contain user hashes, SMTP settings, session secret, and applicant PII)
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Runtime logs, PID files & uploaded applicant files
+logs/
+*.log
+*.pid
+uploads/
+RLApplicationPortalBGC/logs/
+RLApplicationPortalBGC/uploads/
+
+# Generated Fresh App instance
+RLApplicationPortal_Fresh/
+
+# Environment & secret files
+.env
+.env.*
+*.pem
+*.key
+
+# OS & editor artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

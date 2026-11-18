@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Real LIFE Foundation (BGC) — Scholarship Application Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top rl-navbar">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#home">
+        <img src="assets/rl/Logo/Real LIFE Logo black.png" alt="Real LIFE Foundation Logo" style="height: 40px; width: auto;" />
+        <span class="badge bg-success-subtle text-success-emphasis border border-success-subtle d-none d-sm-inline"><span class="client-name-text">BGC</span> Center</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#what-we-do">Programs</a></li>
+          <li class="nav-item"><a class="nav-link" href="#announcements">Announcements</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <a id="navSignInBtn" href="signin.html" class="btn btn-rl btn-sm px-3">Sign In</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Important Announcement Banner (clean single-item carousel under menu header) -->
+  <div id="importantBanner" class="bg-success text-white py-2 px-3 d-none" style="border-bottom: 2px solid #589c30;">
+    <div id="importantBannerCarousel" class="carousel slide container" data-bs-ride="carousel" data-bs-interval="5000">
+      <div class="carousel-inner text-center small fw-semibold" id="importantBannerInner"></div>
+    </div>
+  </div>
+
+  <!-- Hero / Mission Statement -->
+  <header id="home" class="hero-section">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <span class="hero-badge mb-3">Real LIFE Foundation &middot; <span class="client-name-text">BGC</span> Scholarship Portal</span>
+          <h1 class="display-5 fw-bold mb-3">Empowering Underprivileged Youth Through Education, Character, and Leadership.</h1>
+          <p class="lead text-secondary mb-4">
+            Real LIFE Foundation is a Philippine nongovernmental organization that exists to honor God by serving and empowering the underprivileged youth of the Philippines through educational assistance, character formation, and leadership development.
+          </p>
+          <div id="heroCtaOpen" class="d-flex flex-wrap gap-2">
+            <a href="register.html" class="btn btn-rl btn-lg px-4">Apply to the Program</a>
+            <a href="signin.html" class="btn btn-outline-rl btn-lg px-4">Sign In</a>
+          </div>
+          <div id="heroCtaClosed" class="alert alert-warning py-2 px-3 small fw-semibold d-none">
+            Registration for the school year is not yet open. Check for announcement.
+          </div>
+          <div id="heroDeadlineBadge" class="small text-muted fw-semibold mt-2 d-none"></div>
+        </div>
+        <div class="col-lg-5">
+          <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner" id="heroCarouselInner">
+              <div class="carousel-item active">
+                <img src="assets/rl/testSamplePics.jpg" alt="Real LIFE Foundation Scholars" class="hero-photo" />
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- What We Do -->
+  <section id="what-we-do" class="section-pad bg-white border-bottom">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title mb-2">Who We Are &amp; What We Do</h2>
+        <p class="text-muted mx-auto" style="max-width: 680px;">
+          Our holistic scholarship program equips Senior High School and College scholars in <span class="client-name-text">BGC</span> and partner communities to thrive academically and lead with integrity.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="pillar-card">
+            <div class="pillar-icon">01</div>
+            <h4 class="fw-bold mb-2">Educational Assistance</h4>
+            <p class="text-muted small mb-3">Financial aid that covers tuition and miscellaneous fees so students can focus on finishing strong.</p>
+            <ul class="small text-secondary ps-3 mb-0">
+              <li class="mb-1"><strong>School-related expenses:</strong> Supplies, uniforms, and project support.</li>
+              <li class="mb-1"><strong>Weekly allowances:</strong> Support for daily transportation and meals.</li>
+              <li><strong>Course freedom:</strong> Scholars choose the SHS strand or college program aligned with their strengths.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="pillar-card">
+            <div class="pillar-icon">02</div>
+            <h4 class="fw-bold mb-2">Character Formation</h4>
+            <p class="text-muted small mb-3">Good character is equally important as education in preparing students for life.</p>
+            <ul class="small text-secondary ps-3 mb-0">
+              <li class="mb-1"><strong>LIFE Groups:</strong> Small-group mentoring on leadership, integrity, faith, and excellence with dedicated coaches.</li>
+              <li><strong>Scholar Updates:</strong> Monthly community gatherings where scholars share wins, struggles, and mutual encouragement.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="pillar-card">
+            <div class="pillar-icon">03</div>
+            <h4 class="fw-bold mb-2">Leadership Development</h4>
+            <p class="text-muted small mb-3">Investing in future leaders who will make a lasting impact across every sector of society.</p>
+            <ul class="small text-secondary ps-3 mb-0">
+              <li class="mb-1"><strong>Special workshops:</strong> Practical life skills, career readiness, and personal well-being sessions.</li>
+              <li><strong>National Scholars’ Conference:</strong> Annual summit preparing graduating college scholars for the working world.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Announcements / Bulletin Board -->
+  <section id="announcements" class="section-pad">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-between align-items-end mb-4 gap-2">
+        <div>
+          <h2 class="section-title mb-1">Announcements &amp; Bulletin Board</h2>
+          <p class="text-muted mb-0">Latest scholarship cycle updates, orientation dates, and documentary requirements.</p>
+        </div>
+        <span class="badge text-bg-success px-3 py-2">Cycle: SY 2026–2027</span>
+      </div>
+
+      <div class="row g-3" id="announcementsGrid">
+        <div class="col-md-4">
+          <div class="bulletin-card">
+            <div class="small fw-bold text-success text-uppercase mb-1">Application Window</div>
+            <h5 class="fw-bold">Preliminary Screening Open</h5>
+            <p class="small text-muted mb-0">Submit your applicant profile and prepare your last <strong>3 years of grades</strong> and <strong>proof of household income</strong>.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="bulletin-card">
+            <div class="small fw-bold text-success text-uppercase mb-1">Orientation</div>
+            <h5 class="fw-bold">BGC Center Applicant Briefing</h5>
+            <p class="small text-muted mb-0">Shortlisted applicants will receive an email invitation with exact venue details and interview schedule after document verification.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="bulletin-card">
+            <div class="small fw-bold text-success text-uppercase mb-1">Screening Stages</div>
+            <h5 class="fw-bold">5-Step Review Process</h5>
+            <p class="small text-muted mb-0">Unprocessed → For Verification → Shortlisted / Interview → House Visitation → Approved. Email updates are sent at every stage.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section-pad bg-white border-top border-bottom">
+    <div class="container">
+      <h2 class="section-title mb-4">Frequently Asked Questions</h2>
+      <div class="accordion" id="faqAccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+              What documents do I need to upload for preliminary screening?
+            </button>
+          </h2>
+          <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+            <div class="accordion-body small text-secondary">
+              Prepare a shared Google Drive folder containing your <strong>report cards/grades for the last 3 years</strong> and <strong>proof of family/household income</strong> (e.g., ITR, Certificate of Indigency, or payslips). Paste the Drive link in the application form.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+              How will I know if my application moves to the next stage?
+            </button>
+          </h2>
+          <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body small text-secondary">
+              You can sign in to the portal anytime to view your live status tag, and our team sends email notifications whenever your status changes (including sending the official Real LIFE application form once verification passes).
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+              What happens during Shortlisted &amp; House Visitation stages?
+            </button>
+          </h2>
+          <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body small text-secondary">
+              Applicants who pass document verification are scheduled for an interview. Those shortlisted for final consideration undergo a home visit by our BGC center staff before final approval.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-4 bg-dark text-light">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2 small">
+      <div><strong>Real LIFE Foundation &middot; <span class="client-name-text">BGC</span> Center</strong> &mdash; Scholarship Application Portal</div>
+      <div>
+        <a href="privacy.html" class="text-light text-decoration-underline me-3">Privacy Policy &amp; Terms (PH)</a>
+        <span class="text-secondary">Educational Assistance &middot; Character Formation &middot; Leadership Development</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Chat Widget -->
+  <button class="btn btn-rl chat-fab" onclick="toggleChat()">Scholarship Assistant</button>
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <span>Scholarship Inquiry Assistant</span>
+      <div class="d-flex align-items-center gap-2">
+        <button type="button" class="btn btn-sm text-white p-0" style="font-size:0.75rem;" onclick="clearPublicChat()">Clear</button>
+        <button type="button" class="btn-close btn-close-white btn-sm" onclick="toggleChat()" aria-label="Close chat"></button>
+      </div>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-msg bot">Hi! Tap a quick topic below or ask a question about requirements, application stages, or how to apply.</div>
+    </div>
+    <div class="px-2 py-1 border-top bg-white d-flex flex-wrap gap-1">
+      <button type="button" class="btn btn-outline-rl btn-sm py-0 px-2" style="font-size:0.74rem;" onclick="askQuickChat('What documents are required?')">Requirements</button>
+      <button type="button" class="btn btn-outline-rl btn-sm py-0 px-2" style="font-size:0.74rem;" onclick="askQuickChat('What are the application stages?')">Stages</button>
+      <button type="button" class="btn btn-outline-rl btn-sm py-0 px-2" style="font-size:0.74rem;" onclick="askQuickChat('How do I apply?')">Apply Now</button>
+    </div>
+    <form class="p-2 border-top d-flex gap-2 bg-white" onsubmit="sendChat(event)">
+      <input type="text" id="chatInput" class="form-control form-control-sm" placeholder="Type your question..." />
+      <button type="submit" class="btn btn-rl btn-sm">Send</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="js/components/core.js"></script>
+  <script src="js/components/home.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
